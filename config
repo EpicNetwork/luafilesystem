@@ -17,5 +17,3 @@ WARN= -Wall -W -Waggregate-return -Wcast-align -Wmissing-prototypes -Wnested-ext
 INCS= $(LUA_INC)
 CFLAGS= $(WARN) $(INCS) -O2 -fPIC
 CC ?= gcc
-
-# $Id: config,v 1.21 2007/10/27 22:42:32 carregal Exp $

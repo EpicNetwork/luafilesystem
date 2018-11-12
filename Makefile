@@ -1,5 +1,3 @@
-# $Id: Makefile,v 1.36 2009/09/21 17:02:44 mascarenhas Exp $
-
 T= lfs
 
 CONFIG= ./config
@@ -9,17 +7,27 @@ include $(CONFIG)
 SRCS= src/$T.c
 OBJS= src/$T.o
 
-lib: src/lfs.so
+# For Linux
+linux:
+	make src/lfs.so "DLLFLAGS = -shared -fPIC"
+
+# For Mac OS
+macosx:
+	make src/lfs.so "DLLFLAGS = -bundle -undefined dynamic_lookup"
 
 src/lfs.so: $(OBJS)
-	MACOSX_DEPLOYMENT_TARGET="10.3"; export MACOSX_DEPLOYMENT_TARGET; $(CC) $(LIB_OPTION) -o src/lfs.so $(OBJS)
+	$(CC) $(DLLFLAGS) -o src/lfs.so $(OBJS)
 
-test: lib
-	LUA_CPATH=./src/?.so lua tests/test.lua
+# For 32-bit Windows
+win32:
+	make src/lfs.dll "DLLFLAGS = -shared -fPIC"
 
-install:
-	mkdir -p $(DESTDIR)$(LUA_LIBDIR)
-	cp src/lfs.so $(DESTDIR)$(LUA_LIBDIR)
+# For 64-bit Windows
+win64:
+	make src/lfs.dll "DLLFLAGS = -shared -fPIC"
+
+src/lfs.dll: $(OBJS)
+	$(CC) $(DLLFLAGS) -o src/lfs.dll $(OBJS)
 
 clean:
-	rm -f src/lfs.so $(OBJS)
+	rm -f src/lfs.so src/lfs.dll $(OBJS)

@@ -5,12 +5,14 @@ BUILD_FOLDER_MASTER=$(abspath .)/../../build
 PREFIX=$(BUILD_FOLDER_MASTER)
 
 # System's libraries directory (where binary libraries are installed)
-LUA_LIBDIR= $(PREFIX)/luajit/lib/lua/5.1
+LUA_LIBDIR= $(PREFIX)/lib/lua/5.1
+# Where to output the file
+LUA_OUTDIR= $(PREFIX)/lib/lua/5.1
 
 # Lua includes directory
-LUA_INC += -I$(PREFIX)/luajit/include
-LUA_INC += -I$(PREFIX)/luajit/include/luajit-2.1
-LUA_INC += -I$(PREFIX)/luajit/lua5.1
+LUA_INC += -I$(PREFIX)/include
+LUA_INC += -I$(PREFIX)/include/luajit-2.1
+LUA_INC += -I$(PREFIX)/lua5.1
 
 LIBNAME= $T.so.$V
 

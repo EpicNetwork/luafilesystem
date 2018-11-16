@@ -16,7 +16,7 @@ macosx:
 	make src/lfs.so "DLLFLAGS = -bundle -undefined dynamic_lookup"
 
 src/lfs.so: $(OBJS)
-	$(CC) $(DLLFLAGS) -o src/lfs.so $(OBJS)
+	$(CC) $(DLLFLAGS) -o $(LUA_OUTDIR)/lfs.so $(OBJS)
 
 # For 32-bit Windows
 win32:
@@ -27,7 +27,7 @@ win64:
 	make src/lfs.dll "DLLFLAGS = -shared -fPIC"
 
 src/lfs.dll: $(OBJS)
-	$(CC) $(DLLFLAGS) -o src/lfs.dll $(OBJS)
+	$(CC) $(DLLFLAGS) -o $(LUA_OUTDIR)/lfs.dll $(OBJS)
 
 clean:
-	rm -f src/lfs.so src/lfs.dll $(OBJS)
+	rm -f $(OBJS)
